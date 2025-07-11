@@ -746,10 +746,40 @@ export default function App() {
     cursorStyle.innerHTML = `* { cursor: none !important; }`;
     document.head.appendChild(cursorStyle);
 
+    const scrollbarStyle = document.createElement('style');
+    scrollbarStyle.innerHTML = `
+      /* Ẩn thanh cuộn mặc định cho main container */
+      main::-webkit-scrollbar {
+        display: none;
+      }
+      main {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+
+      /* CSS cho thanh cuộn tùy chỉnh bên trong Collection */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #333;
+        border-radius: 4px;
+        border: 2px solid black;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+      }
+    `;
+    document.head.appendChild(scrollbarStyle);
+
 
     return () => {
         if (document.head.contains(fontLink)) document.head.removeChild(fontLink);
         if (document.head.contains(cursorStyle)) document.head.removeChild(cursorStyle);
+        if (document.head.contains(scrollbarStyle)) document.head.removeChild(scrollbarStyle);
         document.body.style.backgroundColor = '';
     };
   }, []);
