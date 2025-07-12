@@ -20,25 +20,22 @@ const aboutData = {
     ]
 };
 
-// Dữ liệu sản phẩm áo thun
-const products = [
-  { id: 1, name: "Void Tee", collection: "SS24", img: "https://cdn.hstatic.net/products/1000306633/v_q00068_eb92df24aff647ad8da5c781450dabb7.jpg" },
-  { id: 2, name: "Chrome Hoodie", collection: "FW23", img: "https://placehold.co/1000x1200/bbbbbb/000000?text=Chrome+Hoodie" },
-  { id: 3, name: "Structure Longsleeve", collection: "SS24", img: "https://placehold.co/1000x1200/d1d1d1/000000?text=Structure+LS" },
-  { id: 4, name: "Glitch Tee", collection: "FW23", img: "https://placehold.co/1000x1200/c2c2c2/000000?text=Glitch+Tee" },
-  { id: 5, name: "Urban Cargo", collection: "SS24", img: "https://placehold.co/1000x1200/e8e8e8/000000?text=Urban+Cargo" },
-  { id: 6, name: "Reflect Jacket", collection: "FW23", img: "https://placehold.co/1000x1200/b0b0b0/000000?text=Reflect+Jacket" },
-  { id: 7, name: "Mono Tee", collection: "SS24", img: "https://placehold.co/1000x1200/f0f0f0/000000?text=Mono+Tee" },
-  { id: 8, name: "System Cap", collection: "FW23", img: "https://placehold.co/1000x1200/cccccc/000000?text=System+Cap" },
-];
+// CẬP NHẬT: Dữ liệu sản phẩm áo thun, thêm nhiều mục để thể hiện layout
+const products = Array.from({ length: 24 }, (_, i) => ({
+  id: i + 1,
+  name: `Item #${i + 1}`,
+  collection: `Collection ${i % 3 === 0 ? 'SS24' : 'FW23'}`,
+  img: `https://placehold.co/800x1000/${(10 + i * 5).toString(16)}/ffffff?text=Product+${i+1}`
+}));
+
 
 const skills = ["Figma", "Adobe XD", "Prototyping", "User Research", "Interaction Design", "React", "JavaScript", "HTML/CSS", "Design System", "Branding", "Problem Solving", "Agile"];
 
 const services = [
-  { title: "Thiết kế Trải nghiệm Người dùng (UX)", description: "Nghiên cứu, phân tích và tối ưu hóa luồng tương tác để tạo ra sản phẩm thân thiện và hiệu quả." },
-  { title: "Thiết kế Giao diện Người dùng (UI)", description: "Xây dựng hệ thống giao diện đẹp mắt, nhất quán và phù hợp với nhận diện thương hiệu." },
-  { title: "Thiết kế Tương tác", description: "Tạo ra các chuyển động và hiệu ứng vi mô giúp tăng cường sự gắn kết của người dùng." },
-  { title: "Branding & Identity", description: "Phát triển bộ nhận diện thương hiệu độc đáo và đáng nhớ, từ logo đến guideline." },
+  { title: "Thiết kế Mẫu Áo (Graphic Design)", description: "Sáng tạo các thiết kế đồ họa độc đáo, từ ý tưởng, phác thảo đến hoàn thiện file in ấn, đảm bảo tính thẩm mỹ và phù hợp với xu hướng streetwear." },
+  { title: "Xây dựng Bộ sưu tập (Collection Curation)", description: "Tư vấn và xây dựng ý tưởng cho các bộ sưu tập theo mùa, tạo ra một câu chuyện liền mạch và hấp dẫn cho thương hiệu của bạn." },
+  { title: "Nhận diện Thương hiệu (Brand Identity)", description: "Xây dựng bộ nhận diện thương hiệu thời trang toàn diện, bao gồm logo, tag áo, bao bì và các ấn phẩm marketing." },
+  { title: "Tư vấn Sản xuất (Production Consulting)", description: "Tư vấn về chất liệu vải, kỹ thuật in ấn và quy trình sản xuất để đảm bảo sản phẩm cuối cùng đạt chất lượng cao nhất." },
 ];
 
 const testimonials = [
@@ -87,7 +84,7 @@ const CustomCursor = () => {
 
     return (
         <motion.div
-            className="fixed top-0 left-0 rounded-full pointer-events-none flex items-center justify-center"
+            className="fixed top-0 left-0 rounded-full pointer-events-none hidden md:flex items-center justify-center"
             style={{ 
                 zIndex: 9999, 
                 mixBlendMode: isView ? 'normal' : 'difference' 
@@ -231,7 +228,7 @@ const Header = () => {
 //==================================================================
 const HeroSection = () => {
   return (
-    <section id="hero" className="h-screen w-full flex flex-col justify-center items-center relative text-white overflow-hidden bg-black">
+    <div className="h-full w-full flex flex-col justify-center items-center relative text-white overflow-hidden bg-black">
       <img
         src="https://placehold.co/1920x1080/000000/ffffff?text=Background+Image"
         alt="Hero Background"
@@ -245,7 +242,7 @@ const HeroSection = () => {
           {`${YOUR_ROLE.toUpperCase()} & VISUAL STORYTELLER`}
         </motion.h1>
       </div>
-    </section>
+    </div>
   );
 };
 
@@ -271,7 +268,7 @@ const AboutSection = () => {
     };
 
     return (
-        <section id="about" ref={ref} className="h-screen w-full flex flex-col justify-center bg-black text-white p-6 md:p-12 relative overflow-hidden">
+        <div ref={ref} className="h-full w-full flex flex-col justify-center bg-black text-white p-6 md:p-12 relative overflow-hidden">
             <motion.h1 
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center text-[25vw] leading-none font-black text-white/5 select-none z-0"
                 initial={{ y: '10%' }}
@@ -318,7 +315,7 @@ const AboutSection = () => {
                     </div>
                 </motion.div>
             </motion.div>
-        </section>
+        </div>
     );
 };
 
@@ -327,99 +324,54 @@ const AboutSection = () => {
 // COMPONENT 5: WORK SECTION (Phần dự án)
 //==================================================================
 const WorkSection = () => {
-    const [layout, setLayout] = useState('grid');
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [direction, setDirection] = useState(0);
+    const [layout, setLayout] = useState('4x2');
     const { setCursorType } = useContext(CursorContext);
-
-    const paginate = (newDirection) => {
-        setDirection(newDirection);
-        setCurrentIndex(prevIndex => (prevIndex + newDirection + products.length) % products.length);
-    };
-
-    const slideVariants = {
-        enter: (direction) => ({ x: direction > 0 ? '100%' : '-100%', opacity: 0 }),
-        center: { zIndex: 1, x: 0, opacity: 1 },
-        exit: (direction) => ({ zIndex: 0, x: direction < 0 ? '100%' : '-100%', opacity: 0 }),
+    
+    const layoutClasses = {
+        '2x1': 'grid-cols-2',
+        '4x2': 'grid-cols-4',
+        '8x3': 'grid-cols-8',
     };
 
     const LayoutSwitcher = () => (
         <div className="flex justify-center items-center gap-2">
-            <button onClick={() => setLayout('single')} className={`p-2 rounded-md transition-colors ${layout === 'single' ? 'bg-white text-black' : 'bg-transparent text-white hover:bg-white/20'}`}>
-                <IconLayoutSingle className="w-6 h-6" />
-            </button>
-            <button onClick={() => setLayout('grid')} className={`p-2 rounded-md transition-colors ${layout === 'grid' ? 'bg-white text-black' : 'bg-transparent text-white hover:bg-white/20'}`}>
+            <button onClick={() => setLayout('2x1')} className={`p-2 rounded-md transition-colors ${layout === '2x1' ? 'bg-white text-black' : 'bg-transparent text-white hover:bg-white/20'}`}>
                 <IconLayoutGrid className="w-6 h-6" />
             </button>
-            <button onClick={() => setLayout('dense')} className={`p-2 rounded-md transition-colors ${layout === 'dense' ? 'bg-white text-black' : 'bg-transparent text-white hover:bg-white/20'}`}>
+            <button onClick={() => setLayout('4x2')} className={`p-2 rounded-md transition-colors ${layout === '4x2' ? 'bg-white text-black' : 'bg-transparent text-white hover:bg-white/20'}`}>
                 <IconLayoutDense className="w-6 h-6" />
             </button>
         </div>
     );
 
     return (
-        <section id="work" className="h-screen w-full flex flex-col bg-black text-white p-6 md:p-12">
+        <div className="h-full w-full flex flex-col bg-black text-white p-6 md:p-12">
             <div className="text-center mb-4 flex-shrink-0 pt-20">
-                <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase" style={{ fontFamily: "'Anton', sans-serif" }}>
+                <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase" style={{ fontFamily: "'Anton', sans-serif" }}>
                     Collection
                 </h2>
             </div>
-
             <div className="flex-grow relative overflow-hidden mb-4">
-                <AnimatePresence mode="wait">
-                    {layout === 'single' ? (
-                        <div key="single" className="w-full h-full relative group" onMouseEnter={() => setCursorType('view')} onMouseLeave={() => setCursorType('default')}>
-                            <AnimatePresence initial={false} custom={direction}>
-                                <motion.div
-                                    key={currentIndex}
-                                    custom={direction}
-                                    variants={slideVariants}
-                                    initial="enter"
-                                    animate="center"
-                                    exit="exit"
-                                    transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.2 } }}
-                                    className="absolute inset-0 w-full h-full flex items-center justify-center"
-                                >
-                                    <div className="w-full max-w-md aspect-[3/4] relative">
-                                        <img src={products[currentIndex].img} alt={products[currentIndex].name} className="w-full h-full object-cover rounded-lg grayscale" />
-                                        <div className="absolute bottom-4 left-4 text-white">
-                                            <h3 className="text-2xl font-bold uppercase">{products[currentIndex].name}</h3>
-                                            <p className="text-gray-300">{products[currentIndex].collection}</p>
-                                        </div>
+                 <motion.div key={layout} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full h-full overflow-y-auto custom-scrollbar">
+                    <div className={`grid ${layoutClasses[layout]}`}>
+                        {products.map((product) => (
+                            <div key={product.id} className="group relative aspect-w-1 aspect-h-1" onMouseEnter={() => setCursorType('view')} onMouseLeave={() => setCursorType('default')}>
+                                <img src={product.img} alt={product.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <div>
+                                        <h3 className="text-lg font-bold uppercase text-white">{product.name}</h3>
+                                        <p className="text-gray-300 text-sm">{product.collection}</p>
                                     </div>
-                                </motion.div>
-                            </AnimatePresence>
-                            <div className="absolute top-0 left-0 w-1/3 h-full z-20 cursor-pointer flex items-center justify-start" onClick={() => paginate(-1)}>
-                                <div className="p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><IconChevronLeft className="w-10 h-10 text-white" /></div>
+                                </div>
                             </div>
-                            <div className="absolute top-0 right-0 w-1/3 h-full z-20 cursor-pointer flex items-center justify-end" onClick={() => paginate(1)}>
-                                <div className="p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><IconChevronRight className="w-10 h-10 text-white" /></div>
-                            </div>
-                        </div>
-                    ) : (
-                         <motion.div key={layout} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full h-full overflow-y-auto custom-scrollbar">
-                            <div className={layout === 'grid' ? "grid grid-cols-1 md:grid-cols-2 gap-8" : "grid grid-cols-2 md:grid-cols-4 gap-4"}>
-                                {products.map((product) => (
-                                    <div key={product.id} className="group relative" onMouseEnter={() => setCursorType('view')} onMouseLeave={() => setCursorType('default')}>
-                                        <div className="overflow-hidden rounded-lg aspect-[3/4]">
-                                            <img src={product.img} alt={product.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-                                        </div>
-                                        <div className="mt-4">
-                                            <h3 className="text-xl font-bold uppercase">{product.name}</h3>
-                                            <p className="text-gray-400">{product.collection}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                        ))}
+                    </div>
+                </motion.div>
             </div>
-            
             <div className="flex-shrink-0">
                 <LayoutSwitcher />
             </div>
-        </section>
+        </div>
     );
 };
 
@@ -517,7 +469,7 @@ const SkillsSection = () => {
     };
 
     return (
-        <section id="skills" ref={sectionRef} className="h-screen w-full flex flex-col justify-center items-center bg-black text-white p-6 md:p-12">
+        <div ref={sectionRef} className="h-full w-full flex flex-col justify-center items-center bg-black text-white p-6 md:p-12">
              <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase mb-8" style={{ fontFamily: "'Anton', sans-serif" }}>
                 My Skills
             </h2>
@@ -555,7 +507,7 @@ const SkillsSection = () => {
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 };
 
@@ -565,7 +517,7 @@ const SkillsSection = () => {
 //==================================================================
 const ServicesSection = () => {
     return (
-        <section id="services" className="h-screen w-full flex flex-col justify-center bg-white text-black p-6 md:p-12">
+        <div className="h-full w-full flex flex-col justify-center bg-white text-black p-6 md:p-12">
             <div className="max-w-7xl mx-auto">
                 <h2 className="text-6xl md:text-8xl font-black mb-12 text-center uppercase" style={{ fontFamily: "'Anton', sans-serif" }}>Services</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -573,8 +525,7 @@ const ServicesSection = () => {
                         <motion.div 
                             key={index}
                             initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.5 }}
+                            whileInView={{ once: true, amount: 0.5 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             className="border-t-2 border-black pt-4"
                         >
@@ -587,7 +538,7 @@ const ServicesSection = () => {
                     ))}
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 
@@ -606,7 +557,7 @@ const TestimonialsSection = () => {
     }, []);
 
     return (
-        <section id="testimonials" className="h-screen w-full flex flex-col justify-center bg-black text-white p-6 md:p-12 overflow-hidden">
+        <div className="h-full w-full flex flex-col justify-center bg-black text-white p-6 md:p-12 overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <h2 className="text-6xl md:text-8xl font-black mb-12 uppercase" style={{ fontFamily: "'Anton', sans-serif" }}>Testimonials</h2>
                 <motion.div ref={carouselRef} className="cursor-grab">
@@ -625,7 +576,7 @@ const TestimonialsSection = () => {
                     </motion.div>
                 </motion.div>
             </div>
-        </section>
+        </div>
     );
 };
 
@@ -671,7 +622,7 @@ const ScrambleText = ({ text }) => {
 
 const ContactSection = () => {
     return (
-        <section id="contact" className="h-screen w-full flex flex-col justify-center bg-white text-black p-6 md:p-12 relative">
+        <div className="h-full w-full flex flex-col justify-center bg-white text-black p-6 md:p-12 relative">
             <div className="max-w-5xl mx-auto text-center">
                 <h2 className="text-6xl md:text-8xl font-black tracking-tighter mb-12 uppercase" style={{ fontFamily: "'Anton', sans-serif" }}>
                     <ScrambleText text="LET'S DEVELOP YOUR IDEA" />
@@ -701,7 +652,7 @@ const ContactSection = () => {
                 </div>
             </div>
             <Footer />
-        </section>
+        </div>
     );
 };
 
@@ -748,30 +699,8 @@ export default function App() {
 
     const scrollbarStyle = document.createElement('style');
     scrollbarStyle.innerHTML = `
-      /* Ẩn thanh cuộn mặc định cho main container */
-      main::-webkit-scrollbar {
-        display: none;
-      }
-      main {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-      }
-
-      /* CSS cho thanh cuộn tùy chỉnh bên trong Collection */
-      .custom-scrollbar::-webkit-scrollbar {
-        width: 8px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #333;
-        border-radius: 4px;
-        border: 2px solid black;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: #555;
-      }
+      main::-webkit-scrollbar { display: none; }
+      main { -ms-overflow-style: none; scrollbar-width: none; }
     `;
     document.head.appendChild(scrollbarStyle);
 
